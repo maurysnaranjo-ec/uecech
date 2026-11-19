@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portal Institucional · U.E. “Cap. Edmundo Chiriboga.”</title>
+<link rel="icon" href="LOGO_2024-2025.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,600;0,800;1,600&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rojo:#D62612;
+    --verde:#00A396;
+    --verde-texto:#00766D;
+    --turquesa:#00A396;
+    --tinta:#1B2B2A;
+    --gris:#5E6B6A;
+    --linea:#E2E9E8;
+    --fondo:#F7FAFA;
+    --blanco:#FFFFFF;
+    --serif:"Bitter", Georgia, "Times New Roman", serif;
+    --sans:"Public Sans", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--tinta);background:var(--fondo);min-height:100vh;display:flex;flex-direction:column;line-height:1.45}
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:3px solid var(--turquesa);outline-offset:2px;border-radius:6px}
+
+  /* Barra superior con franja tricolor */
+  .tricolor{height:8px;background:linear-gradient(90deg,#fff 0 33.33%,var(--verde) 33.33% 66.66%,var(--rojo) 66.66% 100%);border-bottom:1px solid var(--linea)}
+  header{background:var(--blanco);border-bottom:1px solid var(--linea);position:sticky;top:0;z-index:5}
+  .barra{max-width:1500px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:14px}
+  .barra img{width:48px;height:48px;object-fit:contain}
+  .barra .nombre{font-family:var(--serif);font-weight:800;font-size:1.05rem;letter-spacing:.2px}
+  .barra nav{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+  .barra nav a{font-weight:600;font-size:.9rem;padding:8px 14px;border-radius:999px;border:1px solid var(--linea);color:var(--tinta);transition:background .15s,color .15s,border-color .15s}
+  .barra nav a:hover{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+
+  main{flex:1;width:100%;max-width:1500px;margin:0 auto;padding:32px 24px 48px}
+  .rejilla{display:grid;grid-template-columns:minmax(260px,.9fr) repeat(3,minmax(260px,1.1fr));gap:24px;align-items:start}
+
+  /* Tarjeta de bienvenida */
+  .bienvenida{background:var(--blanco);border-radius:20px;box-shadow:0 6px 24px rgba(27,43,42,.08);padding:36px 28px;text-align:center;position:sticky;top:96px}
+  .bienvenida img{width:min(100%,230px);height:auto;margin:0 auto 22px;display:block}
+  .bienvenida h1{font-family:var(--serif);font-weight:800;font-size:1.6rem;line-height:1.2}
+  .bienvenida .inst{font-family:var(--serif);font-weight:600;color:var(--verde-texto);font-size:1.05rem;margin-top:10px}
+  .bienvenida .lema{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--rojo);margin-top:18px;font-size:1.05rem}
+  .bienvenida .lugar{margin-top:6px;color:var(--gris);font-size:.88rem}
+
+  /* Tarjetas de rol */
+  .rol{background:var(--blanco);border-radius:20px;box-shadow:0 6px 24px rgba(27,43,42,.08);padding:22px;border-top:8px solid var(--c)}
+  .rol{--a:var(--c);outline:1px solid transparent}
+  .rol.docente{--c:#fff;--a:var(--tinta);--p:var(--tinta);outline-color:var(--linea)}
+  .rol.estudiante{--c:var(--verde)}
+  .rol.administracion{--c:var(--rojo)}
+  .rol.docente .pill{border:1.5px solid #cfd9d8}
+  .rol h2{text-align:center;font-family:var(--serif);font-weight:800;font-size:1.05rem;letter-spacing:.6px;padding:12px 0;border-bottom:1px solid var(--linea)}
+  .icono{width:84px;height:84px;border-radius:50%;background:color-mix(in srgb,var(--a) 8%,#fff);color:var(--a);display:grid;place-items:center;margin:20px auto 22px}
+  .icono svg{width:42px;height:42px}
+  ul{list-style:none;display:grid;gap:8px}
+  .fila{display:flex;align-items:center;gap:12px;width:100%;padding:6px 14px 6px 6px;border:1px solid var(--linea);border-radius:10px;background:#fff;font-weight:600;font-size:.92rem;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+  .fila:hover{border-color:var(--a);box-shadow:0 2px 10px rgba(27,43,42,.08)}
+  .pill{flex:0 0 74px;height:30px;border-radius:999px;background:var(--c);color:var(--p,#fff);display:grid;place-items:center}
+  .pill svg{width:16px;height:16px}
+  details summary{list-style:none}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid var(--gris);border-bottom:2px solid var(--gris);transform:rotate(45deg);transition:transform .2s}
+  details[open] summary::after{transform:rotate(-135deg)}
+  details[open] summary{border-color:var(--a)}
+  .sub{margin:8px 0 4px 40px;padding-left:14px;border-left:3px solid var(--a);gap:2px}
+  .sub a{display:block;padding:7px 10px;border-radius:8px;font-size:.88rem;color:var(--tinta)}
+  .sub a:hover{background:color-mix(in srgb,var(--a) 10%,#fff)}
+
+  [hidden]{display:none!important}
+  .login{width:min(92vw,440px);margin:auto;border:0;background:var(--blanco);border-radius:20px;box-shadow:0 20px 60px rgba(27,43,42,.35);padding:28px;border-top:8px solid var(--c,var(--rojo));color:var(--tinta)}
+  .login::backdrop{background:rgba(27,43,42,.55)}
+  .login .cancelar{margin-top:10px;background:transparent;color:var(--gris);font-weight:600}
+  .login .cancelar:hover{background:var(--fondo)}
+  .login h2{font-family:var(--serif);font-weight:800;font-size:1.3rem}
+  .login .ayuda{color:var(--gris);font-size:.9rem;margin-top:6px}
+  .login label{display:block;font-weight:600;font-size:.88rem;margin:16px 0 6px}
+  .login input{width:100%;padding:12px;border:1px solid var(--linea);border-radius:10px;font:inherit;background:#fff}
+  .login input:focus{border-color:var(--c,var(--verde))}
+  .login button{margin-top:22px;width:100%;padding:13px;border:0;border-radius:999px;background:var(--c,var(--rojo));color:#fff;font:inherit;font-weight:700;cursor:pointer;transition:filter .15s}
+  .login button:hover{filter:brightness(.92)}
+  .login button:disabled{opacity:.6;cursor:wait}
+  .error{color:var(--rojo);font-weight:600;font-size:.88rem;margin-top:12px;min-height:1.3em}
+  .sesion{display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:600;margin-left:12px}
+  .sesion button{font:inherit;font-weight:600;padding:8px 14px;border-radius:999px;border:1px solid var(--rojo);background:#fff;color:var(--rojo);cursor:pointer}
+  .sesion button:hover{background:var(--rojo);color:#fff}
+  footer{background:var(--rojo);color:#fff;text-align:center;padding:16px 24px;font-weight:700;font-size:.85rem}
+  footer span{display:block;font-weight:400;opacity:.9;margin-top:2px}
+
+  @media (max-width:1280px){
+    .rejilla{grid-template-columns:repeat(2,1fr)}
+    .bienvenida{grid-column:1/-1;position:static;display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:center;text-align:left}
+    .bienvenida img{margin:0}
+  }
+  @media (max-width:760px){
+    .rejilla{grid-template-columns:1fr}
+    .bienvenida{grid-template-columns:1fr;text-align:center}
+    .bienvenida img{margin:0 auto;width:170px}
+    .barra .nombre{font-size:.9rem}
+    .barra nav{display:none}
+    .sesion{margin-left:auto}
+    main{padding:20px 14px 36px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="tricolor" aria-hidden="true"></div>
+<header>
+  <div class="barra">
+    <img src="LOGO_2024-2025.png" alt="Escudo de la Unidad Educativa Cap. Edmundo Chiriboga González">
+    <span class="nombre">U.E. “Cap. Edmundo Chiriboga.”</span>
+    <nav aria-label="Ir a un perfil">
+      <a href="#docente" data-rol="docente">Docente</a>
+      <a href="#estudiante" data-rol="estudiante">Estudiante</a>
+      <a href="#administracion" data-rol="administracion">Administración</a>
+    </nav>
+    <div class="sesion" id="sesion" hidden><span id="quien"></span><button type="button" id="salir">Salir</button></div>
+  </div>
+</header>
+
+<main>
+  <div class="rejilla">
+    <section class="bienvenida" aria-label="Bienvenida">
+      <img src="LOGO_2024-2025.png" alt="Escudo institucional">
+      <div>
+        <h1>Bienvenidos al Portal Institucional</h1>
+        <p class="inst">Unidad Educativa “Cap. Edmundo Chiriboga.”</p>
+        <p class="lema">Estudio, Trabajo y Disciplina</p>
+        <p class="lugar">Riobamba · Ecuador</p>
+      </div>
+    </section>
+
+    <section class="rol docente" id="docente" aria-labelledby="t-docente">
+      <h2 id="t-docente">DOCENTE</h2>
+      <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <ul data-lista="docente"></ul>
+    </section>
+
+    <section class="rol estudiante" id="estudiante" aria-labelledby="t-estudiante">
+      <h2 id="t-estudiante">ESTUDIANTE</h2>
+      <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+      <ul data-lista="estudiante"></ul>
+    </section>
+
+    <section class="rol administracion" id="administracion" aria-labelledby="t-administracion">
+      <h2 id="t-administracion">ADMINISTRACIÓN</h2>
+      <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+      <ul data-lista="administracion"></ul>
+    </section>
+  </div>
+</main>
+
+<dialog class="login" id="login" aria-labelledby="t-login">
+  <h2 id="t-login">Iniciar sesión</h2>
+  <p class="ayuda" id="ayuda-login"></p>
+  <form id="form-login" autocomplete="on">
+    <label for="usuario">Usuario</label>
+    <input id="usuario" name="usuario" type="text" autocomplete="username" required>
+    <label for="clave">Contraseña</label>
+    <input id="clave" name="clave" type="password" autocomplete="current-password" required>
+    <p class="error" id="error" role="alert"></p>
+    <button type="submit" id="entrar">Ingresar</button>
+    <button type="button" class="cancelar" id="cancelar">Cancelar</button>
+  </form>
+</dialog>
+
+<footer>
+  Unidad Educativa “Cap. Edmundo Chiriboga.” © 2026
+  <span>Riobamba, Ecuador</span>
+</footer>
+
+<script>
+  /* Cada apartado es un texto (enlace directo) o [texto, [subapartados]] (menú desplegable). */
+  const MENU = {
+    docente: ["Académico","Cronograma","Distributivo","Horarios de clase","Momentos cívicos","Formatos","Trámites"],
+    estudiante: ["Académico","Horario de clases","Cronograma","Formatos","Momentos cívicos"],
+    administracion: ["Informes","Reportes"]
+  };
+
+  const slug = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()
+                     .replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");
+  const CHEVRON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+
+  document.querySelectorAll("[data-lista]").forEach(ul => {
+    const rol = ul.dataset.lista;
+    ul.innerHTML = MENU[rol].map(item => {
+      if (typeof item === "string") {
+        return `<li><a class="fila" href="${rol}/${slug(item)}.html"><span class="pill">${CHEVRON}</span>${item}</a></li>`;
+      }
+      const [nombre, subs] = item;
+      return `<li><details>
+        <summary class="fila"><span class="pill">${CHEVRON}</span>${nombre}</summary>
+        <ul class="sub">${subs.map(s => `<li><a href="${rol}/${slug(nombre)}/${slug(s)}.html">${s}</a></li>`).join("")}</ul>
+      </details></li>`;
+    }).join("");
+  });
+
+  /* ===== Acceso con login =====
+     Cada usuario guarda solo el SHA-256 de su contraseña. Para crear uno nuevo,
+     abre la consola del navegador y ejecuta:  await sha256("la-clave")
+     Si prefieres validar en Google Sheets, pega la URL de tu Apps Script en URL_VALIDACION
+     (debe responder {ok:true, rol:"docente|estudiante|administracion", nombre:"..."}). */
+  const URL_VALIDACION = "";
+  const USUARIOS = [
+    {usuario:"docente",    hash:"76d1c9eedccfa114163cc1a6e018e7c2c123577c6982935b398c45e19f202f8a", rol:"docente",        nombre:"Docente"},
+    {usuario:"estudiante", hash:"119f028546ed571e2d926bab0dcd10f6845832caacfac9fb7d05582801eb87bf", rol:"estudiante",     nombre:"Estudiante"},
+    {usuario:"admin",      hash:"059a50ce956b7ec61527c7ecc0c55b5a009dc54ab4acddce8852b46baa2aba30", rol:"administracion", nombre:"Administración"}
+  ];
+  const sha256 = async t => [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)))]
+                              .map(b => b.toString(16).padStart(2,"0")).join("");
+
+  async function validar(usuario, clave){
+    if (URL_VALIDACION){
+      const r = await fetch(URL_VALIDACION,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({usuario,clave})});
+      return r.json();
+    }
+    const h = await sha256(clave);
+    const u = USUARIOS.find(x => x.usuario === usuario.trim().toLowerCase() && x.hash === h);
+    return u ? {ok:true, rol:u.rol, nombre:u.nombre, usuario:u.usuario} : {ok:false};
+  }
+
+  const leerSesion = () => { try { return JSON.parse(sessionStorage.getItem("ue_sesion") || "null"); } catch(e){ return null; } };
+  const COLORES = {docente:"var(--tinta)", estudiante:"var(--verde)", administracion:"var(--rojo)"};
+  const NOMBRES = {docente:"Docente", estudiante:"Estudiante", administracion:"Administración"};
+  const puede = (s, rol) => !!s && (s.rol === rol || s.rol === "administracion");
+  const dlg = document.getElementById("login"), err = document.getElementById("error");
+  let rolActual = null, pendiente = null;
+
+  function abrir(rol, destino){
+    rolActual = rol; pendiente = destino;
+    dlg.style.setProperty("--c", COLORES[rol]);
+    document.getElementById("t-login").textContent = "Ingreso " + NOMBRES[rol];
+    document.getElementById("ayuda-login").textContent = "Escribe tu usuario y contraseña para entrar a los apartados de " + NOMBRES[rol].toLowerCase() + ".";
+    err.textContent = "";
+    dlg.showModal();
+    document.getElementById("usuario").focus();
+  }
+
+  function pintar(){
+    const s = leerSesion();
+    document.getElementById("sesion").hidden = !s;
+    if (s) document.getElementById("quien").textContent = s.nombre || s.usuario;
+  }
+
+  /* Cualquier clic dentro de una tarjeta pide el login si aún no hay acceso a ese perfil */
+  document.querySelectorAll(".rol").forEach(sec => sec.addEventListener("click", e => {
+    if (puede(leerSesion(), sec.id)) return;
+    e.preventDefault();
+    abrir(sec.id, e.target.closest("a, summary"));
+  }));
+
+  document.getElementById("form-login").addEventListener("submit", async e => {
+    e.preventDefault();
+    const btn = document.getElementById("entrar");
+    err.textContent = ""; btn.disabled = true;
+    try{
+      if (!URL_VALIDACION && !(window.crypto && crypto.subtle)) throw new Error("https");
+      const r = await validar(document.getElementById("usuario").value, document.getElementById("clave").value);
+      if (!r || !r.ok) err.textContent = "Usuario o contraseña incorrectos.";
+      else if (!puede(r, rolActual)) err.textContent = "Este usuario no tiene acceso al perfil " + NOMBRES[rolActual] + ".";
+      else {
+        sessionStorage.setItem("ue_sesion", JSON.stringify({rol:r.rol, nombre:r.nombre, usuario:r.usuario||""}));
+        e.target.reset(); dlg.close(); pintar();
+        if (pendiente && pendiente.tagName === "A") location.href = pendiente.href;
+        else if (pendiente && pendiente.tagName === "SUMMARY") pendiente.parentElement.open = true;
+      }
+    }catch(x){
+      err.textContent = x.message === "https" ? "Abre el portal desde una dirección https para iniciar sesión." : "No se pudo validar. Inténtalo de nuevo.";
+    }
+    btn.disabled = false;
+  });
+
+  document.getElementById("cancelar").addEventListener("click", () => dlg.close());
+  document.getElementById("salir").addEventListener("click", () => { sessionStorage.removeItem("ue_sesion"); pintar(); });
+  pintar();
+</script>
+</body>
+</html>

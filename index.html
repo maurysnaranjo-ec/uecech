@@ -42,12 +42,11 @@
   .rejilla{display:grid;grid-template-columns:minmax(260px,.9fr) repeat(3,minmax(260px,1.1fr));gap:24px;align-items:start}
 
   /* Tarjeta de bienvenida */
-  .bienvenida{background:var(--blanco);border-radius:20px;box-shadow:0 6px 24px rgba(27,43,42,.08);padding:36px 28px;text-align:center;position:sticky;top:96px}
-  .bienvenida img{width:min(100%,230px);height:auto;margin:0 auto 22px;display:block}
+  .bienvenida{background:var(--blanco);border-radius:20px;box-shadow:0 6px 24px rgba(27,43,42,.08);padding:36px 28px;text-align:left;position:sticky;top:96px}
+  .bienvenida .retrato{width:100%;max-width:300px;aspect-ratio:1;object-fit:cover;display:block;margin:30px auto 0;border-radius:14px;box-shadow:0 10px 28px rgba(27,43,42,.22)}
   .bienvenida h1{font-family:var(--serif);font-weight:800;font-size:1.6rem;line-height:1.2}
   .bienvenida .inst{font-family:var(--serif);font-weight:600;color:var(--verde-texto);font-size:1.05rem;margin-top:10px}
   .bienvenida .lema{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--rojo);margin-top:18px;font-size:1.05rem}
-  .bienvenida .lugar{margin-top:6px;color:var(--gris);font-size:.88rem}
 
   /* Tarjetas de rol */
   .rol{background:var(--blanco);border-radius:20px;box-shadow:0 6px 24px rgba(27,43,42,.08);padding:22px;border-top:8px solid var(--c)}
@@ -95,13 +94,13 @@
 
   @media (max-width:1280px){
     .rejilla{grid-template-columns:repeat(2,1fr)}
-    .bienvenida{grid-column:1/-1;position:static;display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:center;text-align:left}
-    .bienvenida img{margin:0}
+    .bienvenida{grid-column:1/-1;position:static;display:grid;grid-template-columns:1fr 240px;gap:24px;align-items:center;text-align:left}
+    .bienvenida .retrato{margin:0}
   }
   @media (max-width:760px){
     .rejilla{grid-template-columns:1fr}
-    .bienvenida{grid-template-columns:1fr;text-align:center}
-    .bienvenida img{margin:0 auto;width:170px}
+    .bienvenida{grid-template-columns:1fr}
+    .bienvenida .retrato{margin:6px auto 0}
     .barra .nombre{font-size:.9rem}
     .barra nav{display:none}
     .sesion{margin-left:auto}
@@ -128,13 +127,12 @@
 <main>
   <div class="rejilla">
     <section class="bienvenida" aria-label="Bienvenida">
-      <img src="LOGO_2024-2025.png" alt="Escudo institucional">
       <div>
-        <h1>Bienvenidos al Portal Institucional</h1>
-        <p class="inst">Unidad Educativa “Cap. Edmundo Chiriboga.”</p>
+        <h1>Bienvenidos al</h1>
+        <p class="inst">Portal Institucional</p>
         <p class="lema">Estudio, Trabajo y Disciplina</p>
-        <p class="lugar">Riobamba · Ecuador</p>
       </div>
+      <img class="retrato" src="UECECH.jpeg" alt="Capitán Edmundo Chiriboga González, insignia UECECH">
     </section>
 
     <section class="rol docente" id="docente" aria-labelledby="t-docente">

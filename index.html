@@ -201,27 +201,14 @@
   });
 
   /* ===== Acceso con login =====
-     Cada usuario guarda solo el SHA-256 de su contraseña. Para crear uno nuevo,
-     abre la consola del navegador y ejecuta:  await sha256("la-clave")
-     Si prefieres validar en Google Sheets, pega la URL de tu Apps Script en URL_VALIDACION
-     (debe responder {ok:true, rol:"docente|estudiante|administracion", nombre:"..."}). */
+     Los usuarios y contraseñas viven en tu Hoja de Google y se validan con Apps Script.
+     Pega aquí la URL de la aplicación web (termina en /exec). */
   const URL_VALIDACION = "";
-  const USUARIOS = [
-    {usuario:"docente",    hash:"76d1c9eedccfa114163cc1a6e018e7c2c123577c6982935b398c45e19f202f8a", rol:"docente",        nombre:"Docente"},
-    {usuario:"estudiante", hash:"119f028546ed571e2d926bab0dcd10f6845832caacfac9fb7d05582801eb87bf", rol:"estudiante",     nombre:"Estudiante"},
-    {usuario:"admin",      hash:"059a50ce956b7ec61527c7ecc0c55b5a009dc54ab4acddce8852b46baa2aba30", rol:"administracion", nombre:"Administración"}
-  ];
-  const sha256 = async t => [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)))]
-                              .map(b => b.toString(16).padStart(2,"0")).join("");
 
   async function validar(usuario, clave){
-    if (URL_VALIDACION){
-      const r = await fetch(URL_VALIDACION,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({usuario,clave})});
-      return r.json();
-    }
-    const h = await sha256(clave);
-    const u = USUARIOS.find(x => x.usuario === usuario.trim().toLowerCase() && x.hash === h);
-    return u ? {ok:true, rol:u.rol, nombre:u.nombre, usuario:u.usuario} : {ok:false};
+    if (!URL_VALIDACION) throw new Error("sin-url");
+    const r = await fetch(URL_VALIDACION,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({usuario,clave})});
+    return r.json();
   }
 
   const leerSesion = () => { try { return JSON.parse(sessionStorage.getItem("ue_sesion") || "null"); } catch(e){ return null; } };
@@ -259,9 +246,8 @@
     const btn = document.getElementById("entrar");
     err.textContent = ""; btn.disabled = true;
     try{
-      if (!URL_VALIDACION && !(window.crypto && crypto.subtle)) throw new Error("https");
       const r = await validar(document.getElementById("usuario").value, document.getElementById("clave").value);
-      if (!r || !r.ok) err.textContent = "Usuario o contraseña incorrectos.";
+      if (!r || !r.ok) err.textContent = (r && r.mensaje) || "Usuario o contraseña incorrectos.";
       else if (!puede(r, rolActual)) err.textContent = "Este usuario no tiene acceso al perfil " + NOMBRES[rolActual] + ".";
       else {
         sessionStorage.setItem("ue_sesion", JSON.stringify({rol:r.rol, nombre:r.nombre, usuario:r.usuario||""}));
@@ -270,7 +256,7 @@
         else if (pendiente && pendiente.tagName === "SUMMARY") pendiente.parentElement.open = true;
       }
     }catch(x){
-      err.textContent = x.message === "https" ? "Abre el portal desde una dirección https para iniciar sesión." : "No se pudo validar. Inténtalo de nuevo.";
+      err.textContent = x.message === "sin-url" ? "Falta pegar la URL del Apps Script en URL_VALIDACION." : "No se pudo validar. Revisa tu conexión e inténtalo de nuevo.";
     }
     btn.disabled = false;
   });

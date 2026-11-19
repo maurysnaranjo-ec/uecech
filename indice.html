@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Índice de apartados · U.E. “Cap. Edmundo Chiriboga.”</title>
+<link rel="icon" href="LOGO_2024-2025.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,600;0,800;1,600&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rojo:#D62612; --verde:#00A396; --verde-texto:#00766D;
+    --tinta:#1B2B2A; --gris:#5E6B6A; --linea:#E2E9E8; --fondo:#F7FAFA; --blanco:#fff;
+    --serif:"Bitter", Georgia, "Times New Roman", serif;
+    --sans:"Public Sans","Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);color:var(--tinta);background:var(--fondo);min-height:100vh;display:flex;flex-direction:column;line-height:1.45}
+  a{color:inherit;text-decoration:none}
+  ul{list-style:none}
+  [hidden]{display:none!important}
+  :focus-visible{outline:3px solid var(--verde);outline-offset:2px;border-radius:6px}
+
+  /* Encabezado: franja, escudo y nombre, y debajo el menú horizontal */
+  .tricolor{height:8px;background:linear-gradient(90deg,#fff 0 33.33%,var(--verde) 33.33% 66.66%,var(--rojo) 66.66% 100%);border-bottom:1px solid var(--linea)}
+  header{background:var(--blanco);border-bottom:1px solid var(--linea);position:relative;z-index:10}
+  .barra{max-width:1500px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:14px}
+  .barra img{width:48px;height:48px;object-fit:contain}
+  .barra .nombre{font-family:var(--serif);font-weight:800;font-size:1.05rem}
+  .barra a.volver{margin-left:auto;font-weight:600;font-size:.9rem;padding:8px 14px;border-radius:999px;border:1px solid var(--linea);transition:background .15s,color .15s}
+  .barra a.volver:hover{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+
+  .menu{border-top:1px solid var(--linea)}
+  .menu-in{max-width:1500px;margin:0 auto;padding:0 24px;position:relative}
+  .menu-toggle{display:none;font:inherit;font-weight:700;padding:12px 0;background:none;border:0;cursor:pointer;color:var(--tinta)}
+  .barra-menu{display:flex;flex-wrap:wrap}
+  .op{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;font:inherit;font-weight:600;font-size:.92rem;color:var(--tinta);background:none;border:0;text-align:left;cursor:pointer;padding:8px 12px;border-radius:8px}
+  .op:hover{background:color-mix(in srgb,var(--verde) 12%,#fff)}
+  .tope{position:relative}
+  .tope > .op{width:auto;border-radius:0;padding:14px 16px;border-bottom:3px solid transparent}
+  .tope > .op:hover{background:none;color:var(--verde-texto);border-bottom-color:var(--verde)}
+  .tope.abierto > .op{color:var(--rojo);border-bottom-color:var(--rojo)}
+  button.op::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);flex:none}
+  .tope > button.op::after{transform:rotate(45deg);margin-top:-3px}
+  .tiene-sub{position:relative}
+  .desplegable{display:none;position:absolute;top:100%;left:0;min-width:270px;background:var(--blanco);border-top:3px solid var(--rojo);border-radius:0 0 14px 14px;box-shadow:0 14px 34px rgba(27,43,42,.2);padding:6px;z-index:20}
+  .abierto > .desplegable{display:block}
+  .tope.derecha > .desplegable{left:auto;right:0}
+  .desplegable .desplegable{top:-9px;left:100%;border-top-color:var(--verde);border-radius:14px}
+  .desplegable .voltear > .desplegable{left:auto;right:100%}
+  .op.abrir{color:var(--rojo);font-weight:700}
+  .desplegable .desplegable .op.abrir{color:var(--verde-texto)}
+
+  /* Contenido */
+  main{flex:1;width:100%;max-width:1500px;margin:0 auto;padding:32px 24px 48px}
+  .intro{background:var(--blanco);border-radius:20px;box-shadow:0 6px 24px rgba(27,43,42,.08);padding:30px;display:grid;grid-template-columns:1fr 220px;gap:28px;align-items:center}
+  .intro h1{font-family:var(--serif);font-weight:800;font-size:1.9rem;line-height:1.2}
+  .intro .sub-t{font-family:var(--serif);font-weight:600;color:var(--verde-texto);margin-top:8px}
+  .intro .lema{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--rojo);margin-top:12px}
+  .intro img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:14px;box-shadow:0 10px 28px rgba(27,43,42,.22)}
+  .buscar{margin-top:22px;max-width:560px}
+  .buscar label{display:block;font-weight:600;font-size:.88rem;margin-bottom:6px}
+  .buscar input{width:100%;padding:13px 16px;border:1px solid var(--linea);border-radius:999px;font:inherit;background:#fff}
+  .buscar input:focus{border-color:var(--verde)}
+  .resultados{margin-top:20px;background:var(--blanco);border-radius:20px;box-shadow:0 6px 24px rgba(27,43,42,.08);padding:18px;border-top:8px solid var(--verde)}
+  .resultados li a{display:block;padding:10px 12px;border-radius:10px;border:1px solid var(--linea);margin-top:8px;font-weight:600}
+  .resultados li a:hover{border-color:var(--verde);background:color-mix(in srgb,var(--verde) 8%,#fff)}
+  .resultados small{display:block;color:var(--gris);font-weight:400;font-size:.8rem}
+  .resultados .nada{color:var(--rojo);font-weight:600}
+
+  .tarjetas{margin-top:24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+  .tarjeta{--c:var(--verde);background:var(--blanco);border-radius:16px;box-shadow:0 6px 24px rgba(27,43,42,.08);border-top:8px solid var(--c);padding:16px 18px;font-family:var(--serif);font-weight:800;transition:transform .15s}
+  .tarjeta.rojo{--c:var(--rojo)}
+  .tarjeta:hover{transform:translateY(-2px)}
+  .tarjeta span{display:block;font-family:var(--sans);font-weight:600;font-size:.82rem;color:var(--gris);margin-top:4px}
+
+  footer{background:var(--rojo);color:#fff;padding:22px 24px;font-size:.88rem}
+  .pie{max-width:1500px;margin:0 auto;display:flex;flex-wrap:wrap;gap:12px 40px;justify-content:space-between;align-items:center}
+  .pie b{display:block}
+  .redes{display:flex;gap:10px;flex-wrap:wrap}
+  .redes a{padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.7);font-weight:600}
+  .redes a:hover{background:#fff;color:var(--rojo)}
+  .copy{max-width:1500px;margin:14px auto 0;font-weight:700;text-align:center;border-top:1px solid rgba(255,255,255,.35);padding-top:12px}
+
+  /* Celular y tablet: el menú se pliega */
+  @media (max-width:900px){
+    .menu-toggle{display:block}
+    .barra-menu{display:none;flex-direction:column;padding-bottom:10px}
+    .menu.menu-abierto .barra-menu{display:flex}
+    .tope > .op{padding:11px 12px;border-bottom:0;width:100%}
+    .tope.abierto > .op{background:color-mix(in srgb,var(--rojo) 8%,#fff)}
+    .abierto > button.op::after{transform:rotate(45deg);margin-top:-3px}
+    .desplegable,.desplegable .desplegable{position:static;box-shadow:none;border-top:0;border-left:3px solid var(--verde);border-radius:0;margin:2px 0 6px 14px;min-width:0;padding:2px 0 2px 6px}
+    .intro{grid-template-columns:1fr}
+    .intro img{max-width:200px}
+    .intro h1{font-size:1.5rem}
+    .barra .nombre{font-size:.9rem}
+    main{padding:20px 14px 36px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="tricolor" aria-hidden="true"></div>
+  <div class="barra">
+    <img src="LOGO_2024-2025.png" alt="Escudo de la Unidad Educativa Cap. Edmundo Chiriboga González">
+    <span class="nombre">U.E. “Cap. Edmundo Chiriboga.”</span>
+    <a class="volver" href="index.html">Volver al inicio</a>
+  </div>
+  <nav class="menu" id="menu" aria-label="Apartados de la institución">
+    <div class="menu-in">
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false">☰ Apartados</button>
+      <ul class="barra-menu" id="barra-menu"></ul>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="intro">
+    <div>
+      <h1>Índice de apartados</h1>
+      <p class="sub-t">Todos los documentos, formatos y enlaces de la institución</p>
+      <p class="lema">Estudio, Trabajo y Disciplina</p>
+      <div class="buscar">
+        <label for="q">Buscar un apartado</label>
+        <input id="q" type="search" placeholder="Ejemplo: horarios, vacaciones, LOEI…" autocomplete="off">
+      </div>
+    </div>
+    <img src="UECECH.jpeg" alt="Capitán Edmundo Chiriboga González, insignia UECECH">
+  </section>
+
+  <section class="resultados" id="resultados" aria-live="polite" hidden></section>
+  <div class="tarjetas" id="tarjetas"></div>
+</main>
+
+<footer>
+  <div class="pie">
+    <div><b>Dirección</b>Av. 9 de Octubre y García Moreno, Riobamba</div>
+    <div><b>Contacto</b>032940845</div>
+    <div><b>Correo electrónico</b>ueedmundochiriboga70@gmail.com</div>
+    <nav class="redes" aria-label="Redes sociales">
+      <a href="https://www.facebook.com/UEChiriboga" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.tiktok.com/@ue.cap..edmundo.c" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://youtube.com/@unidadeducativacap.edmundo1372" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.instagram.com/uecechiriboga" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+  </div>
+  <p class="copy">Unidad Educativa “Cap. Edmundo Chiriboga.” © 2026</p>
+</footer>
+
+<script>
+  const BASE = "https://sites.google.com/view/ueedmundochiriboga/";
+
+  /* Cada apartado: [texto, ruta] o [texto, ruta, [subapartados]]. Las rutas son las del sitio de Google Sites. */
+  const SECCIONES = [
+    {t:"Institución", p:"institución", c:"verde", items:[
+      ["Misión","misión"],["Visión","visión"],["Historia","historia"],
+      ["Himno a la Institución","himno-a-la-institución"],
+      ["Revistas Institucionales","revistas-institucionales"],
+      ["Consejo Estudiantil 26-27","consejo-estudiantil-26-27",[["Convocatoria","convocatoria"],["Formulario de inscripción","formulario-de-inscripción"]]],
+      ["Autoridades","autoridades"]]},
+    {t:"Docentes", p:"docentes", c:"rojo", items:[
+      ["Cronograma de actividades","cronograma-de-actividades"],
+      ["Lineamientos 26-27","lineamientos-26-27"],
+      ["Cronograma Sierra - Amazonía","cronograma-sierra-amazonía"],
+      ["Distributivo","distributivo"],
+      ["Doc Acomp / Cordinadores / C. Ejecutivo","doc-acomp-cordinadores-c-ejecutivo"],
+      ["Docentes PPE","docentes-ppe"],
+      ["Cobertura DECE","cobertura-dece"],
+      ["Horarios de clases","horarios-de-clases",[["EGBS - Bachillerato","egbs-bachillerato"]]],
+      ["Resolución de conflictos","resolución-de-conflictos"],
+      ["Brigada Docentes","brigada-docentes"],
+      ["Académico","académico",[["Académico UECECH 26-27","académico-uecech-26-27"],["Académico SIEE","académico-siee"]]],
+      ["Formato institucional","formato-institucional"],
+      ["Reserva de espacios","reserva-de-espacios"],
+      ["Trámites","trámites",[["Proceso Justificación","proceso-justificación"],["Formulario Vacaciones","formulario-vacaciones"],["Modelo de oficio","modelo-de-oficio"],["Delegación Deportiva","delegación-deportiva"],["Licencia sin remuneración","licencia-sin-remuneración"]]],
+      ["Inspección","inspección",[["Informes Técnicos/Asistencia","informes-técnicosasistencia"],["Informes Vacaciones","informes-vacaciones"],["Certificados/oficios","certificadosoficios"],["Datos Personal UECECH","datos-personal-uecech"],["Nómina Personal UECECH","nómina-personal-uecech"],["Control de asistencia","control-de-asistencia"]]],
+      ["Correos Institucionales","correos-institucionales",[["Correo Institucional","correo-institucional"],["Google Workspace Institucional","google-workspace-institucional"]]],
+      ["Enlace Blog Estudiantil","enlace-blog-estudiantil"],
+      ["Informe Económico","informe-económico"]]},
+    {t:"Acompañamiento", p:"acompañamiento", c:"verde", items:[
+      ["Momentos Cívicos","momentos-cívicos"],
+      ["Autorización de uso de imagen","autorización-de-uso-de-imagen"],
+      ["Brigadas Padres de Familia","brigadas-padres-de-familia"],
+      ["Acta uso de celular en clase","acta-uso-de-celular-en-clase"],
+      ["Acta por consumo","acta-por-consumo"],
+      ["Notificación de alerta","notificación-de-alerta"],
+      ["Autorización reunión o programas","autorización-reunión-o-programas"],
+      ["Uso de celulares","uso-de-celulares"],
+      ["Solicitud para mejorar","solicitud-para-mejorar"]]},
+    {t:"Documentos DECE", p:"documentos-dece", c:"rojo", items:[
+      ["Ficha","ficha"],["Consentimiento","consentimiento"],["Manejo de datos","manejo-de-datos"],
+      ["Uso de imagen","uso-de-imagen"],["Caso de emergencia","caso-de-emergencia"]]},
+    {t:"Comité PPF", p:"comité-ppf", c:"verde", items:[["Directiva PPFF","directiva-ppff"]]},
+    {t:"Videos", p:"videos", c:"rojo", items:[
+      ["Notificaciones","notificaciones"],["Reporte asistencia","reporte-asistencia"],["Ingreso calificaciones","ingreso-calificaciones"]]},
+    {t:"Marco Legal", p:"marco-legal", c:"verde", items:[
+      ["Acuerdos Ministeriales","acuerdos-ministeriales",[["2026","2026"],["2025","2025"],["2024","2024"],["2023","2023"]]],
+      ["LOEI","loei"],["Reglamento LOEI","reglamento-loei"],["LOSEP","losep"],["Reglamento LOSEP","reglamento-losep"],
+      ["6to Contrato Colectivo","6to-contrato-colectivo"],["Manual de Comunicación","manual-de-comunicación"]]}
+  ];
+
+  const norm = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+  const url = (...partes) => encodeURI(BASE + partes.join("/"));
+  const ext = 'target="_blank" rel="noopener"';
+
+  /* ---------- Menú horizontal en cascada ---------- */
+  function opcion(txt, partes, hijos){
+    const href = url(...partes);
+    if (!hijos) return `<li><a class="op" href="${href}" ${ext}>${txt}</a></li>`;
+    const sub = [`<li><a class="op abrir" href="${href}" ${ext}>Abrir ${txt}</a></li>`]
+      .concat(hijos.map(([t, r, h]) => opcion(t, [...partes, r], h))).join("");
+    return `<li class="tiene-sub"><button type="button" class="op" aria-haspopup="true" aria-expanded="false">${txt}</button><ul class="desplegable">${sub}</ul></li>`;
+  }
+
+  const barra = document.getElementById("barra-menu");
+  barra.innerHTML =
+    `<li class="tope"><a class="op" href="${url("índice")}" ${ext}>Índice</a></li>` +
+    SECCIONES.map(sec => {
+      const sub = [`<li><a class="op abrir" href="${url(sec.p)}" ${ext}>Abrir ${sec.t}</a></li>`]
+        .concat(sec.items.map(([t, r, h]) => opcion(t, [sec.p, r], h))).join("");
+      return `<li class="tope tiene-sub"><button type="button" class="op" aria-haspopup="true" aria-expanded="false">${sec.t}</button><ul class="desplegable">${sub}</ul></li>`;
+    }).join("");
+
+  const movil = () => matchMedia("(max-width:900px)").matches;
+  const subs = () => barra.querySelectorAll("li.tiene-sub");
+  const sincronizar = () => subs().forEach(li => li.querySelector(":scope > button").setAttribute("aria-expanded", li.classList.contains("abierto")));
+
+  function cerrar(li){ li.classList.remove("abierto"); li.querySelectorAll(".abierto").forEach(x => x.classList.remove("abierto")); sincronizar(); }
+  function abrir(li){
+    li.parentElement.querySelectorAll(":scope > li.abierto").forEach(h => { if (h !== li) cerrar(h); });
+    li.classList.add("abierto");
+    if (!movil()){          /* evita que el menú se salga de la pantalla */
+      const d = li.querySelector(":scope > .desplegable");
+      li.classList.remove("derecha", "voltear");
+      if (d.getBoundingClientRect().right > innerWidth - 8) li.classList.add(li.classList.contains("tope") ? "derecha" : "voltear");
+    }
+    sincronizar();
+  }
+
+  subs().forEach(li => {
+    li.addEventListener("mouseenter", () => { if (movil()) return; clearTimeout(li._t); abrir(li); });
+    li.addEventListener("mouseleave", () => { if (movil()) return; li._t = setTimeout(() => cerrar(li), 200); });
+    li.querySelector(":scope > button").addEventListener("click", () => {
+      if (!movil() && li.classList.contains("abierto")) return;
+      li.classList.contains("abierto") ? cerrar(li) : abrir(li);
+    });
+  });
+  document.addEventListener("click", e => { if (!e.target.closest("#menu")) barra.querySelectorAll(".abierto").forEach(cerrar); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") barra.querySelectorAll(".abierto").forEach(cerrar); });
+
+  const menu = document.getElementById("menu"), toggle = document.getElementById("menu-toggle");
+  toggle.addEventListener("click", () => { toggle.setAttribute("aria-expanded", menu.classList.toggle("menu-abierto")); });
+
+  /* ---------- Tarjetas de secciones ---------- */
+  document.getElementById("tarjetas").innerHTML = SECCIONES.map(sec =>
+    `<a class="tarjeta ${sec.c}" href="${url(sec.p)}" ${ext}>${sec.t}<span>${sec.items.length} ${sec.items.length === 1 ? "apartado" : "apartados"}</span></a>`).join("");
+
+  /* ---------- Buscador ---------- */
+  const indice = [];
+  SECCIONES.forEach(sec => (function recorrer(lista, partes, ruta){
+    lista.forEach(([t, r, h]) => {
+      const p = [...partes, r], camino = [...ruta, t];
+      indice.push({ txt: t, camino: ruta.join(" › "), href: url(...p), q: norm(camino.join(" ")) });
+      if (h) recorrer(h, p, camino);
+    });
+  })(sec.items, [sec.p], [sec.t]));
+
+  const res = document.getElementById("resultados");
+  document.getElementById("q").addEventListener("input", e => {
+    const q = norm(e.target.value.trim());
+    if (!q){ res.hidden = true; return; }
+    const hallados = indice.filter(i => i.q.includes(q));
+    res.hidden = false;
+    res.innerHTML = hallados.length
+      ? `<ul>${hallados.map(i => `<li><a href="${i.href}" ${ext}>${i.txt}<small>${i.camino}</small></a></li>`).join("")}</ul>`
+      : `<p class="nada">No hay apartados con esa búsqueda.</p>`;
+  });
+</script>
+</body>
+</html>
